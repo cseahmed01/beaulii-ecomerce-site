@@ -1,0 +1,87 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+
+export default function WhatToExpect() {
+  const [position, setPosition] = useState(50);
+
+  return (
+    <section className="mt-24 text-center">
+
+      {/* Heading */}
+      <h2 className="text-4xl md:text-5xl font-bold text-[#4a1f0f] mb-8">
+        What to expect ?
+      </h2>
+
+      {/* Decorative Banner */}
+      <div className="flex justify-center mb-12">
+        <div className="relative border border-[#b98c6a] text-[#4a1f0f] px-8 py-3 rounded-md text-sm md:text-base font-medium bg-white w-fit">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b98c6a] text-xl">✦</span>
+          <span className="mx-8">
+            Visible Reduction of Stretch Marks in 28 Days*
+          </span>
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#b98c6a] text-xl">✦</span>
+        </div>
+      </div>
+
+      {/* Before/After Slider */}
+      <div className="relative max-w-5xl mx-auto rounded-xl overflow-hidden shadow-lg">
+
+        {/* AFTER IMAGE */}
+        <div className="relative w-full h-[350px] sm:h-[450px] md:h-[520px]">
+          <Image
+            src="/images/whattoexpect/2.webp"
+            alt="After"
+            fill
+            className="object-cover"
+          />
+        </div>
+
+        {/* BEFORE IMAGE */}
+        <div
+          className="absolute top-0 left-0 h-full overflow-hidden"
+          style={{ width: `${position}%` }}
+        >
+          <Image
+            src="/images/whattoexpect/1.webp"
+            alt="Before"
+            fill
+            className="object-cover"
+          />
+        </div>
+
+        {/* Divider */}
+        <div
+          className="absolute top-0 bottom-0 w-[3px] bg-black"
+          style={{ left: `${position}%` }}
+        >
+          <div className="absolute top-1/2 -translate-y-1/2 -left-4 bg-[#2e2e2e] text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md cursor-ew-resize">
+            ≡
+          </div>
+        </div>
+
+        {/* Invisible Slider */}
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
+          className="absolute top-0 left-0 w-full h-full opacity-0 cursor-ew-resize"
+        />
+
+        {/* Labels */}
+        <span className="absolute top-4 left-4 bg-[#4a3b2f] text-white text-xs px-3 py-1 rounded">
+          BEFORE
+        </span>
+
+        <span className="absolute top-4 right-4 bg-[#4a3b2f] text-white text-xs px-3 py-1 rounded">
+          AFTER
+        </span>
+
+      </div>
+
+    </section>
+  );
+}
