@@ -75,30 +75,36 @@ export default function ProductInfo({ product }) {
       {/* Quantity + Add To Cart */}
       <div className="flex gap-4 mb-4 items-center">
 
-        <div className="flex items-center border rounded-md">
+        <div className="flex items-center border rounded-md overflow-hidden">
+
           <button
             onClick={() => setQty(Math.max(1, qty - 1))}
-            className="px-4 py-2"
+            className="px-4 py-2 text-lg font-bold text-[#3b1f0f] hover:bg-gray-100 transition"
           >
-            -
+            −
           </button>
-          <span className="px-6 font-semibold">{qty}</span>
+
+          <span className="px-6 font-semibold text-base">
+            {qty}
+          </span>
+
           <button
             onClick={() => setQty(qty + 1)}
-            className="px-4 py-2"
+            className="px-4 py-2 text-lg font-bold text-[#3b1f0f] hover:bg-gray-100 transition"
           >
             +
           </button>
+
         </div>
 
-        <button className="flex-1 bg-[#5a2a0f] text-white py-3 rounded-md font-semibold hover:bg-[#3b1f0f] transition">
+        <button className="flex-1 bg-[#5a2a0f] text-white py-3 rounded-md font-semibold hover:bg-[#3b1f0f] transition cursor-pointer">
           ADD TO CART
         </button>
 
       </div>
 
       {/* Buy Now */}
-      <button className="w-full border border-[#5a2a0f] text-[#5a2a0f] py-3 rounded-md font-semibold hover:bg-[#5a2a0f] hover:text-white transition mb-6">
+      <button className="w-full border border-[#5a2a0f] text-[#5a2a0f] py-3 rounded-md font-semibold hover:bg-[#5a2a0f] hover:text-white transition mb-6 cursor-pointer">
         BUY IT NOW
       </button>
 
