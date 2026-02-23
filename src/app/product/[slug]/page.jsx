@@ -7,32 +7,68 @@ import WhyBeaulii from "@/components/product/WhyBeaulii";
 import Reviews from "@/components/Reviews";
 import ProductSection from "@/components/ProductSection";
 
-/*
-  In real production:
-  Replace this with DB fetch using slug
-*/
-const productData = {
-  title: "Dark Patch Reducer Cream",
-  price: "3999.00",
-  oldPrice: "5449.00",
-  discount: 67,
-  reviews: 103,
-  images: [
-    "/images/bestsellers/1.webp",
-    "/images/bestsellers/2.webp",
-    "/images/bestsellers/3.webp",
-    "/images/bestsellers/4.webp",
-  ],
+/* ================= REQUIRED FOR STATIC EXPORT ================= */
+export function generateStaticParams() {
+  return [
+    { slug: "dark-patch-reducer-cream" },
+    { slug: "flawless-skin-combo" },
+    { slug: "foot-care-cream" },
+  ];
+}
+
+/* ================= MOCK PRODUCT DATA ================= */
+const products = {
+  "dark-patch-reducer-cream": {
+    title: "Dark Patch Reducer Cream",
+    price: "3999.00",
+    oldPrice: "5449.00",
+    discount: 67,
+    reviews: 103,
+    images: [
+      "/images/bestsellers/1.webp",
+      "/images/bestsellers/2.webp",
+      "/images/bestsellers/3.webp",
+      "/images/bestsellers/4.webp",
+    ],
+  },
+  "flawless-skin-combo": {
+    title: "Flawless Skin Combo",
+    price: "2999.00",
+    oldPrice: "3999.00",
+    discount: 25,
+    reviews: 78,
+    images: [
+      "/images/bestsellers/1.webp",
+      "/images/bestsellers/2.webp",
+    ],
+  },
+  "foot-care-cream": {
+    title: "Foot Care Cream",
+    price: "1999.00",
+    oldPrice: "2999.00",
+    discount: 30,
+    reviews: 52,
+    images: [
+      "/images/bestsellers/3.webp",
+      "/images/bestsellers/4.webp",
+    ],
+  },
 };
 
+/* ================= PAGE ================= */
 export default async function ProductDetailsPage({ params }) {
-  // ✅ Next.js 16 Fix
   const { slug } = await params;
 
-  /*
-    In production:
-    const product = await getProductBySlug(slug)
-  */
+  const productData = products[slug];
+
+  // Safety fallback
+  if (!productData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
+        Product not found
+      </div>
+    );
+  }
 
   return (
     <section className="bg-[#f4f1ee] min-h-screen py-10">
@@ -40,14 +76,11 @@ export default async function ProductDetailsPage({ params }) {
 
         {/* ===== TOP SECTION ===== */}
         <div className="grid md:grid-cols-2 gap-12">
-
           <ProductGallery
             images={productData.images}
             title={productData.title}
           />
-
           <ProductInfo product={productData} />
-
         </div>
 
         {/* ===== BELOW CONTENT ===== */}
@@ -55,7 +88,6 @@ export default async function ProductDetailsPage({ params }) {
         <WhatToExpect />
         <HowToUse />
         <WhyBeaulii />
-
         <Reviews />
         <ProductSection title="bestseller" />
 

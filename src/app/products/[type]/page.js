@@ -1,5 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 
+/* ================= ALL PRODUCTS ================= */
 const allProducts = [
   // ================= BESTSELLER =================
   ...Array.from({ length: 15 }, (_, i) => ({
@@ -35,12 +36,30 @@ const allProducts = [
   })),
 ];
 
+/* ================= REQUIRED FOR STATIC EXPORT ================= */
+export function generateStaticParams() {
+  return [
+    { type: "bestseller" },
+    { type: "new-arrival" },
+    { type: "combo" },
+  ];
+}
+
+/* ================= PAGE ================= */
 export default async function ProductPage({ params }) {
   const { type } = await params;
 
   const filteredProducts = allProducts.filter(
     (product) => product.category === type
   );
+
+  if (!type) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
+        Category not found
+      </div>
+    );
+  }
 
   return (
     <section className="bg-[#f4f1ee] min-h-screen py-10">
@@ -55,38 +74,28 @@ export default async function ProductPage({ params }) {
 
         {/* FILTER + SORT BAR */}
         <div className="bg-white rounded-xl shadow-sm border border-[#e5ddd5] p-4 mb-8">
-
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-            {/* LEFT FILTER */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-[#3b1f0f]">
-
               <span className="font-semibold">Filter:</span>
-
               <button className="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 transition">
                 Availability ▾
               </button>
-
               <button className="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 transition">
                 Price ▾
               </button>
             </div>
 
-            {/* RIGHT SORT */}
             <div className="flex items-center justify-between md:justify-end gap-6 text-sm text-[#3b1f0f]">
-
               <div className="text-gray-500">
                 {filteredProducts.length} Products
               </div>
-
               <button className="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 transition">
                 Sort by: Featured ▾
               </button>
-
             </div>
 
           </div>
-
         </div>
 
         {/* PRODUCT GRID */}
