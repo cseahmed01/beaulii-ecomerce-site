@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import { CartProvider } from "@/context/CartContext";
-import { Toaster } from "react-hot-toast";
+import { AdminAuth } from "@/components/AdminAuth";
+import LayoutWrapper from "@/components/LayoutWrapper";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,28 +28,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        <CartProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <Toaster 
-            position="bottom-right"
-            toastOptions={{
-              duration: 3000,
-              style: {
-                background: '#5a2a0f',
-                color: '#fff',
-                borderRadius: '8px',
-              },
-              success: {
-                iconTheme: {
-                  primary: '#10b981',
-                  secondary: '#fff',
-                },
-              },
-            }}
-          />
-        </CartProvider>
+        <AdminAuth>
+          <CartProvider>
+            <LayoutWrapper>
+              {children}
+            </LayoutWrapper>
+          </CartProvider>
+        </AdminAuth>
       </body>
     </html>
   );

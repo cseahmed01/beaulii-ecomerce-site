@@ -14,6 +14,7 @@ import {
   Percent,
   Phone,
   Users,
+  Shield,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "./CartDrawer";
@@ -87,6 +88,14 @@ export default function Navbar() {
               )}
             </button>
 
+            <Link 
+              href="/admin/dashboard" 
+              className="cursor-pointer hover:text-orange-500 transition"
+              title="Admin Dashboard"
+            >
+              <Shield size={20} />
+            </Link>
+
             <button className="cursor-pointer hover:text-orange-500 transition">
               <User size={20} />
             </button>
@@ -156,16 +165,19 @@ export default function Navbar() {
               { icon: <Phone size={18} />, name: "Contact Us" },
               { icon: <Users size={18} />, name: "About Us" },
               { icon: <User size={18} />, name: "Login/Signup" },
+              { icon: <Shield size={18} />, name: "Admin Panel", href: "/admin/login" },
             ].map((item, index) => (
-              <button
+              <Link
                 key={index}
+                href={item.href || "#"}
+                onClick={() => setOpen(false)}
                 className="w-full flex items-center gap-3 px-5 py-4 border-b cursor-pointer hover:bg-white transition text-left"
               >
                 {item.icon}
                 <span className="font-medium text-[#3b1f0f]">
                   {item.name}
                 </span>
-              </button>
+              </Link>
             ))}
           </div>
 
