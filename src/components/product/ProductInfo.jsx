@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import toast from "react-hot-toast";
 
 export default function ProductInfo({ product }) {
   const [qty, setQty] = useState(1);
@@ -19,6 +20,7 @@ export default function ProductInfo({ product }) {
       image: product.images[0],
       oldPrice: product.oldPrice,
     }, qty);
+    toast.success(`${qty} × ${product.title} added to cart!`);
   };
 
   return (

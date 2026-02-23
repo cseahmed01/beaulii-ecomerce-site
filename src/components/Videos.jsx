@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
+import toast from "react-hot-toast";
 
 const videos = [
   { link: "https://www.youtube.com/embed/MlpO5jFx9p8" },
@@ -54,7 +55,10 @@ export default function Videos() {
                 </div>
 
                 <button 
-                  onClick={() => addToCart({ slug: 'pokonut-stretch-mark-cream', title: 'Pokonut Stretch Mark Cream', price: '5.00', image: '/images/bestsellers/1.webp' })}
+                  onClick={() => {
+                    addToCart({ slug: 'pokonut-stretch-mark-cream', title: 'Pokonut Stretch Mark Cream', price: '5.00', image: '/images/bestsellers/1.webp' });
+                    toast.success('Pokonut Stretch Mark Cream added to cart!');
+                  }}
                   className="w-full bg-black text-white py-2 text-sm font-medium hover:bg-[#333] transition"
                 >
                   Add to Cart

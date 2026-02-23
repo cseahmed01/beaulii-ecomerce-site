@@ -44,7 +44,6 @@ export function CartProvider({ children }) {
 
       return [...prevCart, { ...product, quantity }];
     });
-    setIsCartOpen(true);
   };
 
   // Remove item from cart
