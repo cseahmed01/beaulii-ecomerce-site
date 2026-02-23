@@ -15,9 +15,12 @@ import {
   Phone,
   Users,
 } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import CartDrawer from "./CartDrawer";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { cartCount, openCart } = useCart();
 
   return (
     <>
@@ -72,12 +75,16 @@ export default function Navbar() {
               <Truck size={20} />
             </button>
 
-            <button className="relative cursor-pointer hover:text-orange-500 transition">
+            <button 
+              onClick={openCart}
+              className="relative cursor-pointer hover:text-orange-500 transition"
+            >
               <ShoppingCart size={20} />
-              {/* Optional Cart Badge */}
-              <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] px-1.5 py-[1px] rounded-full">
-                2
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] px-1.5 py-[1px] rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </button>
 
             <button className="cursor-pointer hover:text-orange-500 transition">
@@ -164,6 +171,9 @@ export default function Navbar() {
 
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer />
     </>
   );
 }

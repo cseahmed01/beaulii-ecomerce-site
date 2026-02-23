@@ -4,21 +4,22 @@ import Image from "next/image";
 
 export default function HowToUse() {
   return (
-    <section className="mt-24">
+    <section className="mt-16 sm:mt-20 md:mt-24 px-4">
 
-      <div className="bg-[#e9bfc6] rounded-2xl py-16 px-6 md:px-12">
+      <div className="bg-[#e9bfc6] rounded-2xl sm:rounded-3xl py-10 sm:py-14 md:py-16 px-4 sm:px-8 md:px-12">
 
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-[#6a2c2c] mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-center text-[#6a2c2c] mb-8 sm:mb-10 md:mb-12">
           How to Use
         </h2>
 
-        {/* Single Image */}
+        {/* Image Wrapper */}
         <div className="max-w-4xl mx-auto">
 
-          <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+          <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl overflow-hidden border border-[#6a2c2c]/20">
 
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
+            {/* Responsive Height */}
+            <div className="relative w-full h-[220px] sm:h-[320px] md:h-[450px] lg:h-[500px]">
               <Image
                 src="/images/howtouse/3.webp"
                 alt="How to Use"

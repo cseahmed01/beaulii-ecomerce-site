@@ -1,5 +1,7 @@
 "use client";
 
+import { useCart } from "@/context/CartContext";
+
 const videos = [
   { link: "https://www.youtube.com/embed/MlpO5jFx9p8" },
   { link: "https://www.youtube.com/embed/8GkFzcNQT3M" },
@@ -10,6 +12,8 @@ const videos = [
 ];
 
 export default function Videos() {
+  const { addToCart } = useCart();
+
   return (
     <section className="bg-[#f4f1ee] py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
@@ -41,15 +45,18 @@ export default function Videos() {
                   </h4>
                   <div className="flex gap-2 text-xs mt-1">
                     <span className="font-bold text-[#3b1f0f]">
-                      Tk. 369.00
+                      $ 5.00
                     </span>
                     <span className="line-through text-gray-400">
-                      Tk. 549.00
+                      $ 8.00
                     </span>
                   </div>
                 </div>
 
-                <button className="w-full bg-black text-white py-2 text-sm font-medium hover:bg-[#333] transition">
+                <button 
+                  onClick={() => addToCart({ slug: 'pokonut-stretch-mark-cream', title: 'Pokonut Stretch Mark Cream', price: '5.00', image: '/images/bestsellers/1.webp' })}
+                  className="w-full bg-black text-white py-2 text-sm font-medium hover:bg-[#333] transition"
+                >
                   Add to Cart
                 </button>
               </div>

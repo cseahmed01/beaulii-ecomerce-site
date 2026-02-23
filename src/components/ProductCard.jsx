@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductCard({
   image,
@@ -11,11 +12,23 @@ export default function ProductCard({
   newPrice,
   discount,
 }) {
+  const { addToCart } = useCart();
+
   // Generate slug
   const slug = title
     .toLowerCase()
     .replace(/[^\w\s]/gi, "")
     .replace(/\s+/g, "-");
+
+  const handleAddToCart = () => {
+    addToCart({
+      slug,
+      title,
+      price: newPrice,
+      image,
+      oldPrice,
+    });
+  };
 
   return (
     <div className="bg-white rounded-lg border border-[#e5ddd5] overflow-hidden transition hover:shadow-md group">
@@ -64,12 +77,12 @@ export default function ProductCard({
 
           {oldPrice && (
             <span className="text-gray-400 line-through">
-              Tk. {oldPrice}
+              $ {oldPrice}
             </span>
           )}
 
           <span className="font-bold text-[#3b1f0f] text-sm sm:text-base">
-            Tk. {newPrice}
+            $ {newPrice}
           </span>
 
           {discount && (
@@ -82,9 +95,7 @@ export default function ProductCard({
 
         {/* ADD TO CART BUTTON */}
         <button
-          onClick={() => {
-            console.log("Added to cart:", title);
-          }}
+          onClick={handleAddToCart}
           className="w-full bg-[#5a2a0f] text-white text-[11px] sm:text-sm py-2 sm:py-3 rounded-md font-semibold tracking-wide hover:bg-[#3b1f0f] transition"
         >
           ADD TO CART
